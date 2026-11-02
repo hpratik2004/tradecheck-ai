@@ -1,0 +1,64 @@
+{
+  "name": "TradeCheck Error Alert",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ac337d20-fe81-476b-9443-88cb7f26daa4",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "sendTo": "owner@example.com",
+        "subject": "=TradeCheck ERROR in {{ $json.workflow.name }}",
+        "message": "=A TradeCheck run failed.  \n\nWorkflow: {{ $json.workflow.name }} Failed node: {{ $json.execution.lastNodeExecuted }} Error: {{ $json.execution.error.message }} Execution link: {{ $json.execution.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "a4f0ede6-5aa3-444a-94b7-e6cd9653b3be",
+      "name": "Send a message",
+      "webhookId": "e83163b1-8ed0-4d69-9d75-1c726ccc2159",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REPLACE_WITH_YOUR_CREDENTIAL",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "3842f6d6-8cd4-4474-a6ee-767b2d15e945",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "nodeGroups": [],
+  "id": "L7vyFJKmihNbHJRL",
+  "tags": []
+}
