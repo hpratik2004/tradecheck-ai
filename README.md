@@ -57,6 +57,25 @@ TradeCheck AI is built to fail safe. Any doubt sends the shipment to a person, w
 
 **Honest limits:** synthetic, clean English documents and a 15 code test tariff, so these numbers do not show real world accuracy. During the evaluation, the extractors were switched from Gemini 3.1 Flash Lite to 3.5 Flash Lite after the free tier quota ran out; runs before and after the switch are counted together. The top remaining failure mode is the dependency on the AI service: 3 of 30 runs hit Google Gemini overload errors (all handled safely). Full details: [evaluation report](docs/evaluation_report_v1.2.pdf).
 
+## Evidence: one complete run (TEST-02)
+
+TEST-02 is a synthetic shipment with three planted problems. The production run took **22.3 seconds** from upload to email (n8n execution 950) and correctly sent the shipment to human review.
+
+| Step | Screenshot |
+| --- | --- |
+| 1. Broker uploads the invoice, packing list and certificate of origin | [01_form.png](screenshots/01_form.png) |
+| 2. The workflow runs end to end (all nodes green) | [02_execution.png](screenshots/02_execution.png) |
+| 3. Email to the broker with the issues and the declaration draft | [04_email.png](screenshots/04_email.png) |
+| 4. Google Doc report: quantity, total value and origin mismatches found, HS codes with tariff quotes | [05_report.png](screenshots/05_report.png) |
+
+![TradeCheck AI report for TEST-02](screenshots/05_report.png)
+
+Email addresses and document links are blacked out in the screenshots.
+
+## Business case
+
+For a forwarder checking 300 shipments a month, the manual check costs about €4,950 a month in staff time. With TradeCheck AI, including the broker's review time and the 10% of runs that fell back to a manual check during testing, it costs about €2,302: a saving of €2,648 a month, with payback of the estimated €4,500 build effort in 1.7 months (3.1 months in the worst sensitivity case). Every input is labelled as measured, assumed or not reliably quantifiable; the manual check time is an industry benchmark and has not yet been timed with a real broker. Details: [business case](business/TradeCheck_AI_Business_Case.pdf) and [ROI model](business/TradeCheck_AI_ROI_Model.xlsx).
+
 ## Governance
 
 - **EU AI Act:** most likely not high risk (customs paperwork for businesses is not an Annex III area; a person decides).
@@ -73,6 +92,8 @@ tradecheck-ai/
 ├── LICENSE           MIT license
 ├── workflows/        n8n workflows: Shipment Check (v1.2), Tariff Loader, Error Alert
 ├── docs/             architecture diagram, evaluation report, governance document
+├── business/         one page business case and ROI model
+├── screenshots/      evidence of one complete run (TEST-02)
 ├── evaluation/       answer key and scored results (Excel)
 ├── test-data/        29 synthetic test shipments (TEST-01 to TEST-29)
 ├── sheets/           template for the Google Sheet (tariff, restricted, run_log)
