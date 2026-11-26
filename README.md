@@ -88,7 +88,7 @@ Details: [Business Case](business/TradeCheck_AI_Business_Case_DE.pdf) und [ROI-M
 - **DSGVO:** nur synthetische Testdaten. Echte Dokumente enthalten Kontaktdaten und erfordern einen bezahlten KI-Tarif, Auftragsverarbeitungsverträge und eine Löschfrist.
 - **Google Gemini, kostenloser Tarif:** Google darf eingereichte Inhalte nutzen, deshalb nur mit synthetischen Daten.
 
-Vollständige Bewertung: [Governance-Dokument](docs/governance_v1.2.pdf) (Englisch) und Kapitel 5 der [Projektdokumentation](docs/TradeCheck_AI_Projektdokumentation.pdf). Projektbewertung, keine Rechtsberatung.
+Vollständige Bewertung: [Governance-Dokument](docs/governance_v1.2.pdf) (Englisch) und Abschnitt 4.5 der [Projektdokumentation](docs/TradeCheck_AI_Projektdokumentation.pdf). Projektbewertung, keine Rechtsberatung.
 
 ## Dokumente
 
