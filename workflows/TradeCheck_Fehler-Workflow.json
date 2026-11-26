@@ -1,0 +1,74 @@
+{
+  "name": "TradeCheck Fehler-Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ac337d20-fe81-476b-9443-88cb7f26daa4",
+      "name": "Fehler-Auslöser"
+    },
+    {
+      "parameters": {
+        "sendTo": "operator@example.com",
+        "subject": "=TradeCheck ERROR in {{ $json.workflow.name }}",
+        "message": "=A TradeCheck run failed.  \n\nWorkflow: {{ $json.workflow.name }} Failed node: {{ $json.execution.lastNodeExecuted }} Error: {{ $json.execution.error.message }} Execution link: {{ $json.execution.url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        224,
+        0
+      ],
+      "id": "a4f0ede6-5aa3-444a-94b7-e6cd9653b3be",
+      "name": "Betreiber benachrichtigen",
+      "webhookId": "e83163b1-8ed0-4d69-9d75-1c726ccc2159"
+    },
+    {
+      "parameters": {
+        "content": "## Fehler-Workflow\n- Startet, wenn ein Produktionslauf abbricht\n- E-Mail an den Betreiber: Workflow, fehlgeschlagener Knoten, Fehlermeldung\n- Gilt nicht für Testläufe im Editor",
+        "height": 384,
+        "width": 560,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -96,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "9c075311-07a3-4145-8ffa-060ed213fa96",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Fehler-Auslöser": {
+      "main": [
+        [
+          {
+            "node": "Betreiber benachrichtigen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "nodeGroups": [],
+  "tags": []
+}
